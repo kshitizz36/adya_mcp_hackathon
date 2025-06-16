@@ -3,8 +3,13 @@
 # Learn more about .gitignore:
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
-# Node artifact files
+# Dependencies
 node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
 dist/
 
 # Compiled Java class files
@@ -25,6 +30,8 @@ dist/
 
 # JetBrains IDE
 .idea/
+*.swp
+*.swo
 
 # Unit test reports
 TEST*.xml
@@ -50,3 +57,32 @@ Thumbs.db
 
 ./mcp_servers/python/clients/venv
 __pycache__
+
+# Python specific
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+.venv/
+.env/
+pip-log.txt
+pip-delete-this-directory.txt
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Configuration files with credentials
+**/config.json
+config.json
+config.*.json
+
+# MCP Server specific configs
+mcp_servers/js/*/config.json
+mcp_servers/python/*/config.json
+docker_integrations/*/config.json
+
+# API Keys and Secrets
+*.pem
+*.key
+secrets/

@@ -1,0 +1,27 @@
+{
+  "name": "adya-mcp-hackathon-team28",
+  "version": "1.0.0",
+  "description": "Team 28 (Code Paglus) - MCP Server Implementations for Adya Hackathon",
+  "private": true,
+  "workspaces": [
+    "mcp_servers/js/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "dev": "npm run dev --workspaces",
+    "start:square": "npm run dev --workspace=mcp_servers/js/square_mcp",
+    "start:h2o": "npm run dev --workspace=mcp_servers/js/h2o_ai_mcp",
+    "start:github": "npm run dev --workspace=mcp_servers/js/optional_github_mcp",
+    "start:athena": "npm run dev --workspace=mcp_servers/js/aws_athena_mcp",
+    "test:plaid": "npm run test --workspace=mcp_servers/js/plaid_client",
+    "docker:athena": "cd docker_integrations/athena && docker-compose up"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "tsx": "^4.0.0"
+  },
+  "keywords": ["mcp", "hackathon", "adya", "ai", "typescript"],
+  "author": "Team 28 - Code Paglus",
+  "license": "MIT"
+}

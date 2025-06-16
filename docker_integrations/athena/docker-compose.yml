@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  athena-mcp:
+    build: .
+    container_name: athena-mcp-server
+    ports:
+      - "3004:3004"
+    environment:
+      - PORT=3004
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      - ATHENA_DATABASE=${ATHENA_DATABASE:-default}
+      - ATHENA_WORKGROUP=${ATHENA_WORKGROUP:-primary}
+    volumes:
+      - ./config.json:/app/config.json
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3004/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Optional: LocalStack for testing without AWS account
+  localstack:
+    image: localstack/localstack:latest
+    container_name: athena-localstack
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=athena,s3,glue
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+    volumes:
+      - "./localstack:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    profiles:
+      - testing
